@@ -1,10 +1,27 @@
 services:
 
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    command:
+      - "--log.level=DEBUG"
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+    networks:
+      - traefik-network
+
   sonarqube:
     image: sonarqube:latest
     container_name: sonarqube
-    ports:
-      - "${SONARQUBE_PORT:-9000}:9000"
     volumes:
       - ${COMMON_PATH}\SonarQube\volumes\conf:/opt/sonarqube/conf
       - ${COMMON_PATH}\SonarQube\volumes\data:/opt/sonarqube/data
@@ -20,8 +37,15 @@ services:
     restart: unless-stopped
     networks:
       - sonarqube-network
+      - traefik-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dev-tools_traefik-network"
+      - "traefik.http.routers.sonarqube.rule=Host(`sonarqube.localhost`)"
+      - "traefik.http.routers.sonarqube.entrypoints=web"
+      - "traefik.http.services.sonarqube.loadbalancer.server.port=9000"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/api/system/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:9000/api/system/status"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -31,10 +55,10 @@ services:
         condition: service_healthy
 
   sonarqube-db:
-    image: postgres:17
+    image: postgres:latest
     container_name: sonarqube-db
     volumes:
-      - ${COMMON_PATH}\SonarQube\volumes\postgresql:/var/lib/postgresql/data
+      - ${COMMON_PATH}\SonarQube\volumes\postgresql:/var/lib/postgresql
     cpus: 1.0
     mem_limit: 1g
     mem_reservation: 512m
@@ -56,7 +80,6 @@ services:
     hostname: smtp4dev
     container_name: smtp4dev
     ports:
-      - "${SMTP4DEV_WEB_PORT:-5000}:80"
       - "25:25"
       - "143:143"
     volumes:
@@ -74,10 +97,18 @@ services:
     mem_reservation: 1g
     networks:
       - smtp4dev-network
+      - traefik-network
     environment:
       - ServerOptions__Urls=${SMTP4DEV_SERVER_OPTIONS__URLS}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.smtp4dev.rule=Host(`smtp.localhost`)"
+      - "traefik.http.routers.smtp4dev.entrypoints=web"
+      - "traefik.http.services.smtp4dev.loadbalancer.server.port=80"
 
 networks:
+  traefik-network:
+    driver: bridge
   sonarqube-network:
     driver: bridge
   smtp4dev-network:

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker-compose up:*)",
+      "Bash(timeout:*)",
+      "Bash(docker logs:*)",
+      "Bash(pwsh -NoProfile -Command \"Start-Sleep -Seconds 3; docker logs traefik 2>&1 | Select-Object -Last 15\")",
+      "Bash(docker context:*)",
+      "Bash(pwsh -NoProfile -Command \"Start-Sleep -Seconds 5; docker logs traefik 2>&1 | Select-Object -Last 10\")",
+      "Bash(curl:*)",
+      "Bash(docker ps:*)",
+      "Bash(pwsh -NoProfile -Command:*)",
+      "Bash(docker inspect:*)",
+      "Bash(docker-compose restart:*)",
+      "Bash(docker-compose down:*)",
+      "Bash(docker exec:*)"
+    ]
+  }
+}
