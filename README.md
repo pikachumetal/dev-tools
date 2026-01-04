@@ -62,6 +62,20 @@ Conjunto de herramientas de desarrollo basadas en Docker para entornos locales.
    ./scripts/generate-certs.sh
    ```
 
+6. Configura el archivo hosts:
+
+   **PowerShell (usa gsudo):**
+   ```powershell
+   .\scripts\setup-hosts.ps1
+   ```
+
+   **Bash:**
+   ```bash
+   ./scripts/setup-hosts.sh
+   ```
+
+   Para eliminar las entradas: `.\scripts\setup-hosts.ps1 -Remove` o `./scripts/setup-hosts.sh --remove`
+
 ## Uso
 
 ### Iniciar todos los servicios

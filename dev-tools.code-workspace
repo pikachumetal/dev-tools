@@ -10,6 +10,13 @@
     },
   ],
   "settings": {
-    "cSpell.words": ["alcstronghold", "isready", "loadbalancer"],
+    "cSpell.words": [
+      "alcstronghold",
+      "exposedbydefault",
+      "isready",
+      "loadbalancer",
+      "redirections",
+      "websecure",
+    ],
   },
 }
