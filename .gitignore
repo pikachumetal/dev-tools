@@ -1,0 +1,38 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IDE - JetBrains
+.idea/
+
+# IDE - Visual Studio
+.vs/
+*.suo
+*.user
+
+# Claude Code local settings
+.claude/
+.mcp.json
+
+# Docker
+docker-compose.override.yml
+docker-compose.local.yml
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~

@@ -58,7 +58,7 @@ services:
     image: postgres:latest
     container_name: sonarqube-db
     volumes:
-      - ${COMMON_PATH}\SonarQube\volumes\postgresql:/var/lib/postgresql
+      - ${COMMON_PATH}\SonarQube\volumes\db:/var/lib/postgresql
     cpus: 1.0
     mem_limit: 1g
     mem_reservation: 512m
@@ -83,8 +83,8 @@ services:
       - "25:25"
       - "143:143"
     volumes:
-      - ${COMMON_PATH}\Smtp4Dev\Containers\Volumes\data:/smtp4dev
-      - ${COMMON_PATH}\Smtp4Dev\Containers\Volumes\keys:/root/.aspnet/DataProtection-Keys
+      - ${COMMON_PATH}\Smtp4Dev\volumes\data:/smtp4dev
+      - ${COMMON_PATH}\Smtp4Dev\volumes\keys:/root/.aspnet/DataProtection-Keys
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
