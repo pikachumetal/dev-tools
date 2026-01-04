@@ -12,11 +12,18 @@
 *.suo
 *.user
 
-# Claude Code local settings
-.claude/
-.mcp.json
+# Claude Code
+!.claude/
+.claude/settings.local.json
+!.mcp.json
 
 # Docker
+compose.override.yaml
+compose.local.yaml
+compose.override.yml
+compose.local.yml
+docker-compose.override.yaml
+docker-compose.local.yaml
 docker-compose.override.yml
 docker-compose.local.yml
 

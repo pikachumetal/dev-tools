@@ -6,32 +6,60 @@ Conjunto de herramientas de desarrollo basadas en Docker para entornos locales.
 
 | Servicio | Descripcion | URL Local |
 |----------|-------------|-----------|
-| **Traefik** | Proxy reverso y dashboard | http://localhost:8080 |
-| **SonarQube** | Analisis de calidad de codigo | http://sonarqube.localhost |
-| **smtp4dev** | Servidor SMTP para pruebas de email | http://smtp.localhost |
+| **SonarQube** | Analisis de calidad de codigo | https://sonarqube.devtools.local |
+| **smtp4dev** | Servidor SMTP para pruebas de email | https://smtp.devtools.local |
 
 ## Requisitos
 
 - Docker Desktop
 - Docker Compose
+- [traefik-proxy](https://github.com/pikachumetal/traefik-proxy) ejecutandose
+- [mkcert](https://github.com/FiloSottile/mkcert) (para generar certificados TLS)
 
 ## Instalacion
 
-1. Clona el repositorio:
+1. Asegurate de tener [traefik-proxy](https://github.com/pikachumetal/traefik-proxy) corriendo:
+   ```bash
+   cd ../traefik-proxy
+   docker compose up -d
+   ```
+
+2. Clona el repositorio:
+
+   **Bash / PowerShell:**
    ```bash
    git clone https://github.com/pikachumetal/dev-tools.git
    cd dev-tools
    ```
 
-2. Copia el archivo de configuracion:
+3. Copia el archivo de configuracion:
+
+   **Bash:**
    ```bash
    cp .env.example .env
    ```
 
-3. Edita `.env` y configura las rutas segun tu sistema:
+   **PowerShell:**
+   ```powershell
+   Copy-Item .env.example .env
+   ```
+
+4. Edita `.env` y configura las rutas segun tu sistema:
    ```env
    COMMON_PATH=C:\Docker\Applications  # Windows
    COMMON_PATH=/opt/docker/apps        # Linux/Mac
+   ```
+
+5. Genera los certificados TLS:
+
+   **PowerShell:**
+   ```powershell
+   .\scripts\generate-certs.ps1
+   ```
+
+   **Bash:**
+   ```bash
+   ./scripts/generate-certs.sh
    ```
 
 ## Uso
@@ -40,6 +68,12 @@ Conjunto de herramientas de desarrollo basadas en Docker para entornos locales.
 
 ```bash
 docker compose up -d
+```
+
+### Forzar recreacion
+
+```bash
+docker compose up -d --force-recreate
 ```
 
 ### Detener todos los servicios
@@ -75,11 +109,6 @@ docker compose restart sonarqube
 - **Puerto IMAP**: 143
 - **Interfaz web**: Puerto 80 (via Traefik)
 
-### Traefik
-
-- **Dashboard**: http://localhost:8080
-- **Proxy HTTP**: Puerto 80
-
 ## Estructura de volumenes
 
 Los datos persistentes se almacenan en la ruta definida en `COMMON_PATH`:
@@ -99,11 +128,9 @@ COMMON_PATH/
         └── keys/
 ```
 
-> **Nota**: Traefik no requiere volumenes de datos, solo accede al socket de Docker.
-
 ## Redes Docker
 
-- `traefik-network`: Red principal para acceso via proxy
+- `traefik-public`: Red externa compartida con traefik-proxy
 - `sonarqube-network`: Red interna para SonarQube y su BD
 - `smtp4dev-network`: Red interna para smtp4dev
 

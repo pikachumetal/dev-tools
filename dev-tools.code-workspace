@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "name": "Dev Tools",
+      "path": ".",
+    },
+    {
+      "name": "Traefik Proxy",
+      "path": "../traefik-proxy",
+    },
+  ],
+  "settings": {
+    "cSpell.words": ["alcstronghold", "isready", "loadbalancer"],
+  },
+}

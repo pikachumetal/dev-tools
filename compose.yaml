@@ -1,24 +1,5 @@
 services:
 
-  traefik:
-    image: traefik:latest
-    container_name: traefik
-    command:
-      - "--log.level=DEBUG"
-      - "--api.dashboard=true"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: unless-stopped
-    networks:
-      - traefik-network
-
   sonarqube:
     image: sonarqube:latest
     container_name: sonarqube
@@ -37,12 +18,13 @@ services:
     restart: unless-stopped
     networks:
       - sonarqube-network
-      - traefik-network
+      - traefik-public
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=dev-tools_traefik-network"
-      - "traefik.http.routers.sonarqube.rule=Host(`sonarqube.localhost`)"
-      - "traefik.http.routers.sonarqube.entrypoints=web"
+      - "traefik.docker.network=traefik-public"
+      - "traefik.http.routers.sonarqube.rule=Host(`sonarqube.devtools.local`)"
+      - "traefik.http.routers.sonarqube.entrypoints=websecure"
+      - "traefik.http.routers.sonarqube.tls=true"
       - "traefik.http.services.sonarqube.loadbalancer.server.port=9000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/api/system/status"]
@@ -97,18 +79,20 @@ services:
     mem_reservation: 1g
     networks:
       - smtp4dev-network
-      - traefik-network
+      - traefik-public
     environment:
       - ServerOptions__Urls=${SMTP4DEV_SERVER_OPTIONS__URLS}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.smtp4dev.rule=Host(`smtp.localhost`)"
-      - "traefik.http.routers.smtp4dev.entrypoints=web"
+      - "traefik.docker.network=traefik-public"
+      - "traefik.http.routers.smtp4dev.rule=Host(`smtp.devtools.local`)"
+      - "traefik.http.routers.smtp4dev.entrypoints=websecure"
+      - "traefik.http.routers.smtp4dev.tls=true"
       - "traefik.http.services.smtp4dev.loadbalancer.server.port=80"
 
 networks:
-  traefik-network:
-    driver: bridge
+  traefik-public:
+    external: true
   sonarqube-network:
     driver: bridge
   smtp4dev-network:
