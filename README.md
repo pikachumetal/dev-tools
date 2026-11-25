@@ -6,14 +6,15 @@ Conjunto de herramientas de desarrollo basadas en Docker para entornos locales.
 
 | Servicio | Descripción | URL local |
 |----------|-------------|-----------|
-| **smtp4dev** | Servidor SMTP para pruebas de email | https://smtp.devtools.local |
+| **smtp4dev** | Servidor SMTP para pruebas de email | https://smtp.devtools.localhost |
 
 ## Requisitos
 
 - Docker Desktop
 - Docker Compose
-- [traefik-proxy](https://github.com/pikachumetal/traefik-proxy) ejecutándose
-- [mkcert](https://github.com/FiloSottile/mkcert) (para generar certificados TLS)
+- [traefik-proxy](https://github.com/pikachumetal/traefik-proxy) clonado en la misma carpeta padre y ejecutándose
+- Node 22 o superior (para el script de certificados de traefik-proxy)
+- [mkcert](https://github.com/FiloSottile/mkcert) (`winget install FiloSottile.mkcert`), con `mkcert -install` hecho una vez
 
 ## Instalación
 
@@ -39,17 +40,13 @@ Conjunto de herramientas de desarrollo basadas en Docker para entornos locales.
    COMMON_PATH=C:\Docker\Applications
    ```
 
-5. Genera los certificados TLS:
+5. Genera el certificado `*.devtools.localhost` con el script de traefik-proxy y reinicia el proxy para que lo recoja:
    ```powershell
-   .\scripts\generate-certs.ps1
+   node ../traefik-proxy/scripts/add-project-cert.mjs devtools
+   docker compose -f ../traefik-proxy/compose.yaml restart
    ```
 
-6. Configura el archivo hosts (usa gsudo):
-   ```powershell
-   .\scripts\setup-hosts.ps1
-   ```
-
-   Para eliminar las entradas: `.\scripts\setup-hosts.ps1 -Remove`
+   No hace falta tocar el archivo hosts: `*.localhost` resuelve a `127.0.0.1`. Más detalle en el README de traefik-proxy, sección «Conectar un proyecto».
 
 ## Uso
 
