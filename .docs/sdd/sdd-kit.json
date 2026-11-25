@@ -59,5 +59,8 @@
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
     "updated": "2026-11-25"
   },
-  "updated": "2026-11-25"
+  "updated": "2026-11-25",
+  "release": {
+    "hasRecipient": true
+  }
 }
