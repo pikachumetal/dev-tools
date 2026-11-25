@@ -10,8 +10,6 @@ $ErrorActionPreference = "Stop"
 
 $hostsPath = "$env:SystemRoot\System32\drivers\etc\hosts"
 $domains = @(
-    "devtools.local",
-    "sonarqube.devtools.local",
     "smtp.devtools.local"
 )
 

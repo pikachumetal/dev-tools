@@ -9,7 +9,7 @@ $ErrorActionPreference = "Stop"
 
 # Check if mkcert is installed
 if (-not (Get-Command mkcert -ErrorAction SilentlyContinue)) {
-    Write-Error "mkcert is not installed. Install it with: choco install mkcert"
+    Write-Error "mkcert is not installed. Install it with: winget install FiloSottile.mkcert"
     exit 1
 }
 
@@ -39,7 +39,7 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "  - $keyFile"
     Write-Host ""
     Write-Host "Domains covered:" -ForegroundColor Yellow
-    Write-Host "  - *.devtools.local (sonarqube.devtools.local, smtp.devtools.local, etc.)"
+    Write-Host "  - *.devtools.local (smtp.devtools.local, etc.)"
     Write-Host "  - devtools.local"
 } else {
     Write-Error "Failed to generate certificates"
