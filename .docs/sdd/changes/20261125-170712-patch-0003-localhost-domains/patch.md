@@ -7,7 +7,7 @@ solution: dev-lead
 status: done
 created: 2026-11-25
 branch: patch/0003-localhost-domains
-commit: <hash>
+commit: b661696
 ---
 
 # Patch 0003 — Dominios *.devtools.localhost con el certificado de traefik-proxy
@@ -49,6 +49,11 @@ Lo que da por existente, comprobado: `../traefik-proxy` `origin/develop` en `c57
 | 2 | `docker compose config --quiet` | ✅ exit 0 |
 | 3 | `docker compose ps` | ✅ `Up 22 seconds (healthy) 127.0.0.1:25->25/tcp, 127.0.0.1:143->143/tcp` |
 | 4 | referencias viejas (`devtools.local`, `setup-hosts`, `generate-certs`, `gsudo`, `tls.yml`) fuera de `ROADMAP.md` y `changes/` | ✅ ninguna |
+| 5 | dev-lead: guion (UI con candado, README, limpieza del hosts, UI sin hosts) | ✅ «validado»; `Select-String` de `devtools` en el hosts → 0 líneas |
+
+Gate: `docker compose config --quiet` → exit 0 · smoke (manual, ensayada por el agente y por el dev-lead) sobre `b661696`
+
+Validado: 2026-11-25 · «validado» · no detalló qué probó
 
 Review (sonnet, effort medium): sin Critical ni Important. Minor 1: la regla «Avisos» de la constitution y «scripts en PowerShell» de `CLAUDE.md` hablan de scripts y el repo ya no tiene → rechazado: siguen valiendo para un script futuro, y cambiar una regla de producto es del dev-lead; se le avisa. Minor 2 y 3: coherentes, sin cambio. Minor 4: `commit` y «Esfuerzo real» se rellenan al cerrar.
 
@@ -58,4 +63,6 @@ Nota: `curl.exe` de Windows (schannel) sin `--ssl-no-revoke` falla con `CRYPT_E_
 
 - Estimación: 0,3 h + gate de cierre (prueba de humo, sin medir)
 - Inicio: 2026-11-25T17:07Z
-- Esfuerzo real: <pendiente>
+- Esfuerzo real: 0,77 h — reloj de la sesión 3,15 h desde 2026-11-25T14:04Z, sin 143 min de espera al dev-lead (55 esperas)
+- Desviación: +157 % sobre 0,3 h. Causa: el reloj cuenta la sesión entera desde el init (14:04Z), no solo el patch; sin medir aparte.
+- Coste de sujetos: no aplica
