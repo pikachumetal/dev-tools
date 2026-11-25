@@ -27,10 +27,10 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-public"
-      - "traefik.http.routers.smtp4dev.rule=Host(`smtp.devtools.local`)"
-      - "traefik.http.routers.smtp4dev.entrypoints=websecure"
-      - "traefik.http.routers.smtp4dev.tls=true"
-      - "traefik.http.services.smtp4dev.loadbalancer.server.port=80"
+      - "traefik.http.routers.devtools-smtp.rule=Host(`smtp.devtools.localhost`)"
+      - "traefik.http.routers.devtools-smtp.entrypoints=websecure"
+      - "traefik.http.routers.devtools-smtp.tls=true"
+      - "traefik.http.services.devtools-smtp.loadbalancer.server.port=80"
 
 networks:
   traefik-public:
