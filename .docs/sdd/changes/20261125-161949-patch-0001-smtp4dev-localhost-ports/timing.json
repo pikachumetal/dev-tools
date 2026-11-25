@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "branch": "patch/0001-smtp4dev-localhost-ports",
+  "measured": true,
+  "clockSeconds": 8536,
+  "withinMargin": true,
+  "totals": {
+    "agentSeconds": 633,
+    "execSeconds": 260,
+    "waitSeconds": 7642,
+    "idleSeconds": 0,
+    "gateSeconds": null
+  },
+  "gateCommand": null,
+  "phases": [
+    {
+      "name": "apertura",
+      "ceremony": true,
+      "measured": true,
+      "agentSeconds": 510,
+      "execSeconds": 179,
+      "waitSeconds": 7445,
+      "idleSeconds": 0,
+      "gateSeconds": null,
+      "estimateHours": null
+    },
+    {
+      "name": "implementacion",
+      "ceremony": false,
+      "measured": true,
+      "agentSeconds": 65,
+      "execSeconds": 21,
+      "waitSeconds": 0,
+      "idleSeconds": 0,
+      "gateSeconds": null,
+      "estimateHours": null
+    },
+    {
+      "name": "revision",
+      "ceremony": true,
+      "measured": false,
+      "reason": "sin eventos: su tiempo queda en implementacion",
+      "agentSeconds": null,
+      "execSeconds": null,
+      "waitSeconds": null,
+      "idleSeconds": null,
+      "gateSeconds": null,
+      "estimateHours": null
+    },
+    {
+      "name": "cierre",
+      "ceremony": true,
+      "measured": true,
+      "agentSeconds": 58,
+      "execSeconds": 60,
+      "waitSeconds": 197,
+      "idleSeconds": 0,
+      "gateSeconds": null,
+      "estimateHours": null
+    }
+  ]
+}

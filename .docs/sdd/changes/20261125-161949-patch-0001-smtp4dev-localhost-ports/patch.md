@@ -7,7 +7,7 @@ solution: dev-lead
 status: done
 created: 2026-11-25
 branch: patch/0001-smtp4dev-localhost-ports
-commit: <hash>
+commit: bfbbcd6
 ---
 
 # Patch 0001 — Puertos de smtp4dev solo en 127.0.0.1
@@ -35,17 +35,27 @@ smtp4dev publica SMTP `25` e IMAP `143` en todas las interfaces: `docker compose
 
 ## 4. Verificación
 
+Gate: `docker compose config --quiet` → exit 0 · smoke (manual, ensayada por el agente y por el dev-lead) sobre `bfbbcd6`
+
 | # | Caso | Resultado |
 | --- | --- | --- |
 | 1 | antes: `docker compose config \| Select-String 'host_ip\|published'` | `published: "25"`, `published: "143"`, sin `host_ip` |
 | 1 | después: el mismo comando | ✅ `host_ip: 127.0.0.1` con `published: "25"` y con `published: "143"`; `docker compose config --quiet` → exit 0 |
+| 2 | agente: `docker compose up -d` y `docker compose ps` | ✅ `Up 14 seconds (healthy) 127.0.0.1:25->25/tcp, 127.0.0.1:143->143/tcp` |
+| 3 | agente: `curl.exe -sk https://smtp.devtools.local` | ✅ HTTP `200` |
+| 4 | agente: `Test-NetConnection` al puerto 25 en `127.0.0.1` y en la IP de red `10.196.26.35` | ✅ `True` · `False` |
+| 5 | dev-lead: el guion de validación (pasos 1-4) | ✅ «validado» |
 
 Sin suite de tests en el proyecto: la verificación es el comando de la tabla (`operations.md` §Testing).
 
 Review (sonnet, effort medium): sin Critical ni Important. Regresión descartada: el healthcheck usa `localhost:80` dentro del contenedor y Traefik llega por `traefik-public`; solo fallaría un contenedor de otro proyecto que use `host.docker.internal:25`, y en este repo no hay ninguno. Minor: faltaba la fila «después» en esta tabla → corregido. `commit` y «Esfuerzo real» se rellenan al cerrar.
 
+Validado: 2026-11-25 · «validado» · no detalló qué probó
+
 ## 5. Tiempo (ligero)
 
 - Estimación: 0,1 h + gate de cierre (prueba de humo, sin medir)
 - Inicio: 2026-11-25T16:19Z
-- Esfuerzo real: <pendiente>
+- Esfuerzo real: 0,25 h — reloj de la sesión 2,37 h desde 2026-11-25T14:04Z, sin 127 min de espera al dev-lead (46 esperas)
+- Desviación: +150 % sobre 0,1 h. Causa: la sesión no se abrió para el patch; el reloj arranca a las 14:04Z con el init y el triaje, así que el real del patch queda sin medir aparte.
+- Coste de sujetos: no aplica

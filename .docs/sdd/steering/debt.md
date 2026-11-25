@@ -15,7 +15,6 @@
 
 | Ítem | Causa | Origen | Impacto | Evidencia | Remedio temporal | Arreglo | Destino |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Puertos `25` y `143` en `0.0.0.0` | defecto del producto | `compose.yaml`; constitution Art. I | alto | `docker compose config` da `published: "25"` sin `host_ip` | — | — | 0001 |
 | Restos de SonarQube y Qodana: bloque comentado y red `sonarqube-network` en `compose.yaml`; `SMTP4DEV_WEB_PORT`, `SONARQUBE_*` y `QODANA_*` sin uso en `.env.example`; `sonarqube.devtools.local` y `devtools.local` en `setup-hosts.ps1`; SonarQube como activo en el README | defecto del producto | entrevista del init; regla ante conflicto | medio | `Select-String compose.yaml sonar` da 25 líneas; `Select-String .env.example '^(SMTP4DEV_WEB_PORT\|SONARQUBE\|QODANA)'` da 8; ningún `Host()` de `../traefik-proxy` usa `devtools.local` | — | — | 0002 |
 | Variantes no Windows: `scripts/setup-hosts.sh`, `scripts/generate-certs.sh`, partes de Bash y Linux del README, y `choco install mkcert` en `generate-certs.ps1` | defecto del producto | entrevista del init: solo Windows | bajo | `Select-String README.md 'Bash\|Linux\|\.sh'` da 18 líneas; `scripts/generate-certs.ps1:12` | — | — | 0002 |
 | README sin tildes | defecto del producto | `README.md`; convención de idioma | bajo | `Select-String README.md 'Instalacion\|Descripcion\|Configuracion'` | — | — | 0002 |
