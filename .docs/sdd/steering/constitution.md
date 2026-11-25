@@ -39,5 +39,5 @@ Un servicio con UI no publica su puerto web en el host: se expone en `traefik-pu
 - **Dónde viven los datos**: bind mounts bajo `${COMMON_PATH}\<Servicio>\volumes\`, con rutas Windows con `\`; `COMMON_PATH` sale de `.env`.
 - **Idioma de los nombres**: inglés para servicios, dominios, variables de entorno y mensajes de los scripts; español para la documentación.
 - **Límites**: todo servicio declara `cpus`, `mem_limit`, `mem_reservation` y `healthcheck`; los valores viven en `compose.yaml`.
-- **Avisos**: cada script comprueba sus requisitos antes de actuar y, si falta uno, corta con un mensaje que dice qué falta y el comando `winget` para instalarlo. Si falta la red `traefik-public` en el `compose up`, avisa el propio error de Docker; el certificado lo genera `traefik-proxy`, que avisa con sus propios errores.
+- **Avisos**: sin avisos propios. Si falta la red `traefik-public` en el `compose up`, avisa el propio error de Docker; el certificado lo genera `traefik-proxy`, que avisa con sus propios errores.
 - **Regla ante conflicto**: `compose.yaml` es la fuente de verdad: `.env.example` solo declara las variables que `compose.yaml` lee. Si no coinciden, se corrige la plantilla, nunca el compose.

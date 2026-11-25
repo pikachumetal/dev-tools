@@ -14,6 +14,6 @@
 
 - Requiere `traefik-proxy` levantado (red externa `traefik-public`) antes de `docker compose up -d`.
 - Ningún puerto se publica fuera de `127.0.0.1`; la UI de cada servicio se expone solo por traefik-proxy.
-- Solo Windows: rutas con `\`, scripts en PowerShell, instalaciones con `winget`.
+- Solo Windows: rutas con `\`, instalaciones con `winget`.
 - `compose.yaml` es la fuente de verdad: `.env.example` lo refleja. El certificado `*.devtools.localhost` lo genera `traefik-proxy`; aquí no hay scripts.
 - Sin gestor de tickets ni worktrees; ids por secuencia del kit.
