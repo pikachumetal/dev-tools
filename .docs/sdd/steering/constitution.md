@@ -30,7 +30,7 @@ Un servicio con UI no publica su puerto web en el host: se expone en `traefik-pu
 ## Convenciones
 
 - **Idioma**: documentación en español con tildes; código, identificadores, variables de entorno y mensajes de los scripts en inglés. Nombres de fichero en inglés.
-- **Ramas**: git-flow: `main` estable (releases), `develop` de integración, `feature/<id>-<slug>` y `patch/<id>-<slug>` desde `develop`.
+- **Ramas**: git-flow: `main` estable (releases), `develop` de integración, `feature/<id>-<slug>` y `patch/<id>-<slug>` desde `develop`. El agente publica `develop` sin preguntar (también su primera publicación y los commits directos); el merge a `main`, los tags y los ajustes del repo en GitHub, con el «sí» del dev-lead.
 - **Commits**: Conventional Commits; tipo y scope en inglés, título y cuerpo en español con términos técnicos en inglés.
 - **Proyecto de referencia**: `../traefik-proxy` (red `traefik-public`, etiquetas de router y certificado `*.devtools.localhost` generado con su `scripts/add-project-cert.mjs devtools`, según su README, «Conectar un proyecto»).
 
