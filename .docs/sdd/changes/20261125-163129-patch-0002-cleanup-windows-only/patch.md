@@ -7,7 +7,7 @@ solution: dev-lead
 status: done
 created: 2026-11-25
 branch: patch/0002-cleanup-windows-only
-commit: <hash>
+commit: 049833e
 ---
 
 # Patch 0002 — Limpieza: SonarQube, Qodana y variantes no Windows
@@ -63,11 +63,22 @@ Fuera del patch, a propósito: `.gitattributes` mantiene `*.sh` y `*.bash` (sin 
 | 1 | después: las mismas búsquedas | ✅ 0 líneas · 0 variables · `generate-certs.ps1, setup-hosts.ps1` |
 | 2 | `docker compose config --quiet` y puertos | ✅ exit 0 · `host_ip: 127.0.0.1` en `25` y `143` |
 | 3 | parseo de `setup-hosts.ps1` y `generate-certs.ps1` (revisor) | ✅ 0 errores |
+| 4 | agente: `docker compose up -d`, `docker compose ps`, `curl.exe -sk https://smtp.devtools.local` | ✅ `Up 12 seconds (healthy) 127.0.0.1:25->25/tcp, 127.0.0.1:143->143/tcp` · HTTP `200` |
+| 5 | dev-lead: guion (estado, UI, README, limpieza del fichero hosts) | ✅ «valido»; el hosts queda solo con `127.0.0.1	smtp.devtools.local` |
+| 6 | ejecución de `setup-hosts.ps1` y `generate-certs.ps1` | no probado: el primero pide UAC y el segundo reescribe los certificados de `traefik-proxy` |
+
+Gate: `docker compose config --quiet` → exit 0 · smoke (manual, ensayada por el agente y por el dev-lead) sobre `049833e`
+
+El comando de limpieza del hosts del primer guion fallaba por las comillas (`=\: The term '=\' is not recognized`); se dio otro con un scriptblock de `gsudo`, ensayado sobre una copia del hosts.
 
 Review (sonnet, effort medium): sin Critical ni Important. Minor 1: `setup-hosts.ps1 -Remove` ya no limpia `devtools.local` ni `sonarqube.devtools.local` de un fichero hosts que ya los tenga → aceptado como efecto lateral: el guion de validación incluye quitarlos a mano. Minor 2: faltaba la fila «después» → corregido; `commit` y «Esfuerzo real» se rellenan al cerrar.
+
+Validado: 2026-11-25 · «valido» · no detalló qué probó
 
 ## 5. Tiempo (ligero)
 
 - Estimación: 0,3 h + gate de cierre (prueba de humo, sin medir)
 - Inicio: 2026-11-25T16:31Z
-- Esfuerzo real: <pendiente>
+- Esfuerzo real: 0,46 h — reloj de la sesión 2,67 h desde 2026-11-25T14:04Z, sin 133 min de espera al dev-lead (50 esperas)
+- Desviación: +53 % sobre 0,3 h. Causa: el reloj cuenta la sesión entera desde el init (14:04Z), no solo el patch; sin medir aparte.
+- Coste de sujetos: no aplica

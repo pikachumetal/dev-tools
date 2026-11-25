@@ -3,13 +3,11 @@
 ## Estructura
 
 ```text
-compose.yaml            servicios Docker (smtp4dev activo; SonarQube y su DB, comentados)
+compose.yaml            servicios Docker (smtp4dev)
 .env.example            plantilla de variables; .env (fuera de git) con los valores del PC
 scripts/
   setup-hosts.ps1       añade o quita los dominios *.devtools.local en el fichero hosts (vía gsudo)
   generate-certs.ps1    genera con mkcert el wildcard *.devtools.local en ../traefik-proxy/certs
-  setup-hosts.sh        variante Bash (a retirar: solo Windows)
-  generate-certs.sh     variante Bash (a retirar: solo Windows)
 ```
 
 ## Piezas y responsabilidades
