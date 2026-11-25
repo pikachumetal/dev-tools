@@ -43,3 +43,7 @@ Desktop.ini
 *.temp
 *.swp
 *~
+.playwright-mcp/
+.superpowers/
+.docs/sdd/sdd-kit.local.json
+.temp/

@@ -13,8 +13,6 @@
 *.css text diff=css
 
 # Scripts
-*.sh text eol=lf diff
-*.bash text eol=lf diff
 *.ps1 text eol=crlf diff
 *.bat text eol=crlf diff
 *.cmd text eol=crlf diff

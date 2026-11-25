@@ -1,69 +1,11 @@
 services:
-
-  sonarqube:
-    image: sonarqube:latest
-    container_name: sonarqube
-    volumes:
-      - ${COMMON_PATH}\SonarQube\volumes\conf:/opt/sonarqube/conf
-      - ${COMMON_PATH}\SonarQube\volumes\data:/opt/sonarqube/data
-      - ${COMMON_PATH}\SonarQube\volumes\extensions:/opt/sonarqube/extensions
-      - ${COMMON_PATH}\SonarQube\volumes\logs:/opt/sonarqube/logs
-    cpus: 1.5
-    mem_limit: 2g
-    mem_reservation: 1g
-    environment:
-      - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-db:5432/${SONARQUBE_POSTGRES_DB}
-      - SONAR_JDBC_USERNAME=${SONARQUBE_POSTGRES_USER}
-      - SONAR_JDBC_PASSWORD=${SONARQUBE_POSTGRES_PASSWORD}
-    restart: unless-stopped
-    networks:
-      - sonarqube-network
-      - traefik-public
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik-public"
-      - "traefik.http.routers.sonarqube.rule=Host(`sonarqube.devtools.local`)"
-      - "traefik.http.routers.sonarqube.entrypoints=websecure"
-      - "traefik.http.routers.sonarqube.tls=true"
-      - "traefik.http.services.sonarqube.loadbalancer.server.port=9000"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/api/system/status"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
-    depends_on:
-      sonarqube-db:
-        condition: service_healthy
-
-  sonarqube-db:
-    image: postgres:latest
-    container_name: sonarqube-db
-    volumes:
-      - ${COMMON_PATH}\SonarQube\volumes\db:/var/lib/postgresql
-    cpus: 1.0
-    mem_limit: 1g
-    mem_reservation: 512m
-    environment:
-      - POSTGRES_USER=${SONARQUBE_POSTGRES_USER}
-      - POSTGRES_PASSWORD=${SONARQUBE_POSTGRES_PASSWORD}
-      - POSTGRES_DB=${SONARQUBE_POSTGRES_DB}
-    restart: unless-stopped
-    networks:
-      - sonarqube-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${SONARQUBE_POSTGRES_USER} -d ${SONARQUBE_POSTGRES_DB}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   smtp4dev:
     image: rnwood/smtp4dev:latest
     hostname: smtp4dev
     container_name: smtp4dev
     ports:
-      - "25:25"
-      - "143:143"
+      - "127.0.0.1:25:25"
+      - "127.0.0.1:143:143"
     volumes:
       - ${COMMON_PATH}\Smtp4Dev\volumes\data:/smtp4dev
       - ${COMMON_PATH}\Smtp4Dev\volumes\keys:/root/.aspnet/DataProtection-Keys
@@ -85,15 +27,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-public"
-      - "traefik.http.routers.smtp4dev.rule=Host(`smtp.devtools.local`)"
-      - "traefik.http.routers.smtp4dev.entrypoints=websecure"
-      - "traefik.http.routers.smtp4dev.tls=true"
-      - "traefik.http.services.smtp4dev.loadbalancer.server.port=80"
+      - "traefik.http.routers.devtools-smtp.rule=Host(`smtp.devtools.localhost`)"
+      - "traefik.http.routers.devtools-smtp.entrypoints=websecure"
+      - "traefik.http.routers.devtools-smtp.tls=true"
+      - "traefik.http.services.devtools-smtp.loadbalancer.server.port=80"
 
 networks:
   traefik-public:
     external: true
-  sonarqube-network:
-    driver: bridge
   smtp4dev-network:
     driver: bridge

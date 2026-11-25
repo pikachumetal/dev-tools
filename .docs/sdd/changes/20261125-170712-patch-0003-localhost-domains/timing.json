@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "branch": "patch/0003-localhost-domains",
+  "measured": true,
+  "clockSeconds": 11354,
+  "withinMargin": true,
+  "totals": {
+    "agentSeconds": 1765,
+    "execSeconds": 1008,
+    "waitSeconds": 8580,
+    "idleSeconds": 0,
+    "gateSeconds": null
+  },
+  "gateCommand": null,
+  "phases": [
+    {
+      "name": "apertura",
+      "ceremony": true,
+      "measured": true,
+      "agentSeconds": 510,
+      "execSeconds": 179,
+      "waitSeconds": 7445,
+      "idleSeconds": 0,
+      "gateSeconds": null,
+      "estimateHours": null
+    },
+    {
+      "name": "implementacion",
+      "ceremony": false,
+      "measured": true,
+      "agentSeconds": 65,
+      "execSeconds": 21,
+      "waitSeconds": 0,
+      "idleSeconds": 0,
+      "gateSeconds": null,
+      "estimateHours": null
+    },
+    {
+      "name": "revision",
+      "ceremony": true,
+      "measured": false,
+      "reason": "sin eventos: su tiempo queda en implementacion",
+      "agentSeconds": null,
+      "execSeconds": null,
+      "waitSeconds": null,
+      "idleSeconds": null,
+      "gateSeconds": null,
+      "estimateHours": null
+    },
+    {
+      "name": "cierre",
+      "ceremony": true,
+      "measured": true,
+      "agentSeconds": 1190,
+      "execSeconds": 808,
+      "waitSeconds": 1135,
+      "idleSeconds": 0,
+      "gateSeconds": null,
+      "estimateHours": null
+    }
+  ]
+}
