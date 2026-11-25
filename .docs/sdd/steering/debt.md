@@ -4,22 +4,18 @@
 
 | Ítem | Origen | Fecha |
 | --- | --- | --- |
-| Retirar SonarQube: el bloque comentado de `sonarqube` y `sonarqube-db`, y la red `sonarqube-network`, de `compose.yaml` (hoy es un cambio sin commitear) | entrevista del init: SonarQube fuera de alcance | 2026-11-25 |
-| `.env.example` declara variables que `compose.yaml` no lee: `SMTP4DEV_WEB_PORT`, `SONARQUBE_PORT`, `SONARQUBE_POSTGRES_*`, `QODANA_*` | `.env.example`; regla ante conflicto de la constitution | 2026-11-25 |
-| `setup-hosts.ps1` incluye `sonarqube.devtools.local`, que ya no existe, y `devtools.local`, que ningún servicio usa; comprobar si `traefik-proxy` usa el dominio raíz antes de quitarlo (también del SAN de `generate-certs.ps1`) | `scripts/setup-hosts.ps1`; regla ante conflicto | 2026-11-25 |
-| Puertos `25` y `143` publicados en `0.0.0.0`; pasar a `127.0.0.1:25:25` y `127.0.0.1:143:143` | `compose.yaml`; Art. I de la constitution | 2026-11-25 |
-| Retirar `scripts/setup-hosts.sh`, `scripts/generate-certs.sh` y las partes Bash y Linux/Mac del README | entrevista del init: solo Windows | 2026-11-25 |
-| `generate-certs.ps1` sugiere `choco install mkcert`; cambiar a `winget install FiloSottile.mkcert` | `scripts/generate-certs.ps1`; regla de avisos | 2026-11-25 |
-| README describe SonarQube como servicio activo (tabla, configuración, volúmenes y redes) | `README.md` | 2026-11-25 |
-| README escrito sin tildes | `README.md`; convención de idioma | 2026-11-25 |
-| Imágenes con `:latest` (`rnwood/smtp4dev:latest`): un `pull` puede cambiar de versión sin aviso | `compose.yaml` | 2026-11-25 |
 
 ## En espera
 
 | Ítem | Causa | Origen | Impacto | Falta | Fecha |
 | --- | --- | --- | --- | --- | --- |
+| Imágenes con `:latest` (`rnwood/smtp4dev:latest`): un `pull` puede cambiar de versión sin aviso | sin determinar | `compose.yaml` | bajo | 2.º caso | 2026-11-25 |
 
 ## Lista
 
 | Ítem | Causa | Origen | Impacto | Evidencia | Remedio temporal | Arreglo | Destino |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| Puertos `25` y `143` en `0.0.0.0` | defecto del producto | `compose.yaml`; constitution Art. I | alto | `docker compose config` da `published: "25"` sin `host_ip` | — | — | 0001 |
+| Restos de SonarQube y Qodana: bloque comentado y red `sonarqube-network` en `compose.yaml`; `SMTP4DEV_WEB_PORT`, `SONARQUBE_*` y `QODANA_*` sin uso en `.env.example`; `sonarqube.devtools.local` y `devtools.local` en `setup-hosts.ps1`; SonarQube como activo en el README | defecto del producto | entrevista del init; regla ante conflicto | medio | `Select-String compose.yaml sonar` da 25 líneas; `Select-String .env.example '^(SMTP4DEV_WEB_PORT\|SONARQUBE\|QODANA)'` da 8; ningún `Host()` de `../traefik-proxy` usa `devtools.local` | — | — | 0002 |
+| Variantes no Windows: `scripts/setup-hosts.sh`, `scripts/generate-certs.sh`, partes de Bash y Linux del README, y `choco install mkcert` en `generate-certs.ps1` | defecto del producto | entrevista del init: solo Windows | bajo | `Select-String README.md 'Bash\|Linux\|\.sh'` da 18 líneas; `scripts/generate-certs.ps1:12` | — | — | 0002 |
+| README sin tildes | defecto del producto | `README.md`; convención de idioma | bajo | `Select-String README.md 'Instalacion\|Descripcion\|Configuracion'` | — | — | 0002 |
