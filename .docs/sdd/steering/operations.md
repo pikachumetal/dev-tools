@@ -9,7 +9,7 @@
 
 Sin tests automáticos: validación del compose y prueba de humo manual.
 
-- **Suites**: `smoke` · `docker compose up -d`, después `docker compose ps` con smtp4dev en `healthy` y `https://smtp.devtools.localhost` cargando · pendiente · integración
+- **Suites**: `smoke` · `docker compose up -d`, después `docker compose ps` con smtp4dev en `healthy` y `https://smtp.devtools.localhost` cargando · ~30 s · integración
 - **Lo afectado**: no aplica; se corre la suite entera.
 - **Gate de cierre**: la suite `smoke` entera.
 - **Gate de merge**: `docker compose config --quiet`

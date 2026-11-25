@@ -56,6 +56,7 @@ Validado: 2026-11-25 · «validado» · no detalló qué probó
 
 - Estimación: 0,1 h + gate de cierre (prueba de humo, sin medir)
 - Inicio: 2026-11-25T16:19Z
-- Esfuerzo real: 0,25 h — reloj de la sesión 2,37 h desde 2026-11-25T14:04Z, sin 127 min de espera al dev-lead (46 esperas)
-- Desviación: +150 % sobre 0,1 h. Causa: la sesión no se abrió para el patch; el reloj arranca a las 14:04Z con el init y el triaje, así que el real del patch queda sin medir aparte.
+- Esfuerzo real: 0,17 h, aproximado con las marcas de los commits (inicio 16:19Z → merge `a365ca7` 16:29Z, con la espera de la validación dentro)
+- Desviación: +70 % sobre 0,1 h. Causa: el arranque y parada del entorno para ensayar la prueba de humo y el push de `develop` que faltaba.
+- Nota (2026-11-25): la primera medida, de `sdd session tokens` (0,25 h), contaba la sesión entera desde el init (14:04Z); se sustituye para no contaminar la calibración.
 - Coste de sujetos: no aplica
