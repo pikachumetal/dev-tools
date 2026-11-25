@@ -4,6 +4,19 @@ Formato: [Keep a Changelog 1.1.0](https://keepachangelog.com/). Changelog técni
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-25
+
+smoke: 2026-11-25 · 0 hallazgos (suite `smoke` del agente sobre `54196ad`, con el contenedor del dev-lead en uso; 0 corregidos en la release)
+
+### Changed
+
+- **0ea6567** — smtp4dev fijado en `rnwood/smtp4dev:3.15.0` y límites ajustados al consumo medido (`cpus 0.5`, `mem_limit 512m`, `mem_reservation 128m`).
+
+### Removed
+
+- **0ea6567** — Fuera la variable `SMTP4DEV_SERVER_OPTIONS__URLS`: la imagen ya trae `http://*:80`.
+- **54196ad** — Fuera `dev-tools.code-workspace`, sin uso.
+
 ## [1.0.0] - 2026-11-25
 
 smoke: 2026-11-25 · 0 hallazgos (suite `smoke` del agente sobre `7de7c0f` y uso del dev-lead en local; 0 corregidos en la release)

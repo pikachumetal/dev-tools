@@ -3,18 +3,22 @@
 
 | Fecha | Id | Tipo | Est (h) | Real (h) | Ratio | Hilo (tokens) | Subagentes (tokens) | Sujetos ($) | Sesión ($) | Carpeta |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-11-25 | 0001 | patch | 0.1 | 0.25 | 2.5 | — | — | no aplica | — | 20261125-161949-patch-0001-smtp4dev-localhost-ports |
-| 2026-11-25 | 0002 | patch | 0.3 | 0.46 | 1.53 | — | — | no aplica | — | 20261125-163129-patch-0002-cleanup-windows-only |
-| 2026-11-25 | 0003 | patch | 0.3 | 0.77 | 2.57 | — | — | no aplica | — | 20261125-170712-patch-0003-localhost-domains |
+| 2026-11-25 | 0001 | patch | 0.1 | 0.17 | 1.7 | — | — | no aplica | — | 20261125-161949-patch-0001-smtp4dev-localhost-ports |
+| 2026-11-25 | 0002 | patch | 0.3 | 0.23 | 0.77 | — | — | no aplica | — | 20261125-163129-patch-0002-cleanup-windows-only |
+| 2026-11-25 | 0003 | patch | 0.3 | 0.12 | 0.4 | — | — | no aplica | — | 20261125-170712-patch-0003-localhost-domains |
 
-**Factor de calibración** (ratio mediano real/estimado, 3 artefactos): **2.5** · media 2.2
+**Factor de calibración** (ratio mediano real/estimado, 3 artefactos): **0.77** · media 0.96
 
 - n insuficiente (hacen falta 5)
 - Tendencia: n insuficiente (hacen falta 20)
 
 | Tipo | n | Mediana | p25–p75 |
 | --- | --- | --- | --- |
-| patch | 3 | 2.5 | — |
+| patch | 3 | 0.77 | — |
+
+| Release | Artefactos | Horas reales | Mediana | Sujetos ($) | Sesión ($) |
+| --- | --- | --- | --- | --- | --- |
+| 1.0.0 | 3 | 0.52 | 0.77 | — | — |
 
 > Con menos de 10 tareas con ratio la calibración es orientativa. Ver `estimation.md`.
 

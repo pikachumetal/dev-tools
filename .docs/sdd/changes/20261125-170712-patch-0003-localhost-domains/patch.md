@@ -63,6 +63,7 @@ Nota: `curl.exe` de Windows (schannel) sin `--ssl-no-revoke` falla con `CRYPT_E_
 
 - Estimación: 0,3 h + gate de cierre (prueba de humo, sin medir)
 - Inicio: 2026-11-25T17:07Z
-- Esfuerzo real: 0,77 h — reloj de la sesión 3,15 h desde 2026-11-25T14:04Z, sin 143 min de espera al dev-lead (55 esperas)
-- Desviación: +157 % sobre 0,3 h. Causa: el reloj cuenta la sesión entera desde el init (14:04Z), no solo el patch; sin medir aparte.
+- Esfuerzo real: 0,12 h, aproximado con las marcas de los commits (inicio 17:07Z → merge `0cda7e6` 17:14Z, con la espera de la validación dentro)
+- Desviación: −60 % sobre 0,3 h. Causa: la solución llegó cerrada de `traefik-proxy` y el certificado ya estaba generado.
+- Nota (2026-11-25): la primera medida, de `sdd session tokens` (0,77 h), contaba la sesión entera desde el init (14:04Z); se sustituye para no contaminar la calibración.
 - Coste de sujetos: no aplica

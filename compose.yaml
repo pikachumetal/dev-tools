@@ -1,6 +1,6 @@
 services:
   smtp4dev:
-    image: rnwood/smtp4dev:latest
+    image: rnwood/smtp4dev:3.15.0
     hostname: smtp4dev
     container_name: smtp4dev
     ports:
@@ -16,14 +16,12 @@ services:
       timeout: 10s
       retries: 5
       start_period: 20s
-    cpus: 1.5
-    mem_limit: 2g
-    mem_reservation: 1g
+    cpus: 0.5
+    mem_limit: 512m
+    mem_reservation: 128m
     networks:
       - smtp4dev-network
       - traefik-public
-    environment:
-      - ServerOptions__Urls=${SMTP4DEV_SERVER_OPTIONS__URLS}
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-public"

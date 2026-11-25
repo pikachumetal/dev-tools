@@ -79,6 +79,7 @@ Validado: 2026-11-25 · «valido» · no detalló qué probó
 
 - Estimación: 0,3 h + gate de cierre (prueba de humo, sin medir)
 - Inicio: 2026-11-25T16:31Z
-- Esfuerzo real: 0,46 h — reloj de la sesión 2,67 h desde 2026-11-25T14:04Z, sin 133 min de espera al dev-lead (50 esperas)
-- Desviación: +53 % sobre 0,3 h. Causa: el reloj cuenta la sesión entera desde el init (14:04Z), no solo el patch; sin medir aparte.
+- Esfuerzo real: 0,23 h, aproximado con las marcas de los commits (inicio 16:31Z → merge `2cde264` 16:45Z, con la espera de la validación dentro)
+- Desviación: −23 % sobre 0,3 h.
+- Nota (2026-11-25): la primera medida, de `sdd session tokens` (0,46 h), contaba la sesión entera desde el init (14:04Z); se sustituye para no contaminar la calibración.
 - Coste de sujetos: no aplica
