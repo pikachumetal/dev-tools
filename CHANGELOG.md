@@ -4,6 +4,14 @@ Formato: [Keep a Changelog 1.1.0](https://keepachangelog.com/). Changelog técni
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-11-25
+
+smoke: 2026-11-25 · 0 hallazgos (suite `smoke` del agente sobre `c9de0a4`, con el contenedor del dev-lead en uso; 0 corregidos en la release)
+
+### Added
+
+- **c9de0a4** — Dependabot revisa cada semana `compose.yaml` y abre un PR contra `develop` cuando sale una versión nueva de una imagen.
+
 ## [1.0.1] - 2026-11-25
 
 smoke: 2026-11-25 · 0 hallazgos (suite `smoke` del agente sobre `54196ad`, con el contenedor del dev-lead en uso; 0 corregidos en la release)
