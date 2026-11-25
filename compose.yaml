@@ -1,6 +1,6 @@
 services:
   smtp4dev:
-    image: rnwood/smtp4dev:3.15.0
+    image: rnwood/smtp4dev:3.16.1
     hostname: smtp4dev
     container_name: smtp4dev
     ports:
